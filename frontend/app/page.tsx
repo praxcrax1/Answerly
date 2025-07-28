@@ -36,8 +36,10 @@ export default function AnswerlyHome() {
   const wsRef = useRef<WebSocket | null>(null)
   const responseRef = useRef("")
 
+  // Use environment variable for WebSocket URL
+  const wsUrl = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8000/ws/chat"
   const connectWebSocket = () => {
-    wsRef.current = new WebSocket("ws://localhost:8000/ws/chat")
+    wsRef.current = new WebSocket(wsUrl)
 
     wsRef.current.onopen = () => {
       console.log("WebSocket connected")
